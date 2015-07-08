@@ -46,6 +46,7 @@
     "object-assign": "^3.0.0",
     "react": "^0.13.3",
     "react-router": "v1.0.0-beta1",
-    "react-tap-event-plugin": "^0.1.7"
+    "react-tap-event-plugin": "^0.1.7",
+    "superagent": "^1.2.0"
   }
 }

@@ -1,47 +1,45 @@
-import React, {PropTypes} from 'react';
-import TaskList from './TaskList.jsx';
-import {AppCanvas, RaisedButton, Styles} from 'material-ui';
+import React from 'react';
+import {RouteHandler} from 'react-router';
 
-const ThemeManager = new Styles.ThemeManager();
+// var Header = require('../components/Header.react.jsx');
+import SessionStore from '../stores/SessionStore';
+// import RouteStore from '../stores/RouteStore.jsx';
+
+function getStateFromStores() {
+  return {
+    isLoggedIn: SessionStore.isLoggedIn(),
+    email: SessionStore.getEmail()
+  };
+}
 
 export default React.createClass({
-  propTypes: {
-    tasks: PropTypes.array.isRequired,
-    onAddTask: PropTypes.func.isRequired,
-    onClear: PropTypes.func.isRequired
+
+  getInitialState() {
+    return getStateFromStores();
   },
 
-  getDefaultProps() {
-    return {
-      tasks: []
-    }
+  componentDidMount() {
+    SessionStore.addChangeListener(this._onChange);
   },
 
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
+  componentWillUnmount() {
+    SessionStore.removeChangeListener(this._onChange);
   },
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
+  // <Header
+  //   isLoggedIn={this.state.isLoggedIn}
+  //   email={this.state.email} />
 
   render() {
-    let {onAddTask, onClear, tasks} = this.props;
     return (
-      <div className="example-page">
-        <h1>Learning Flux</h1>
-        <p>
-          Below is a list of tasks you can implement to better grasp the patterns behind Flux.<br />
-          Most features are left unimplemented with clues to guide you on the learning process.
-        </p>
-
-        <TaskList tasks={tasks} />
-
-        <RaisedButton label="Add Task" primary={true} onClick={onAddTask} />
-        <RaisedButton label="Clear List" secondary={true} onClick={onClear} />
+      <div className="app">
+        <RouteHandler/>
       </div>
     );
+  },
+
+  _onChange() {
+    this.setState(getStateFromStores());
   }
+
 });

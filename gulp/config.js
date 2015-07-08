@@ -1,6 +1,7 @@
 var dest = './dist';
 var src = './src';
 var gutil = require('gulp-util');
+var modRewrite = require('connect-modrewrite');
 
 module.exports = {
   server: {
@@ -10,6 +11,11 @@ module.exports = {
       port: 8080,
       livereload: {
         port: 35929
+      },
+      middleware: function() {
+        return [
+          modRewrite(['!\\.\\w+$ /index.html [L]'])
+        ];
       }
     }
   },
@@ -35,7 +41,7 @@ module.exports = {
     dest: dest
   },
   watch: {
-    src: 'src/**/*.*',
+    src: 'src/**/*',
     tasks: ['build']
   }
 };
