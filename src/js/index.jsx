@@ -1,17 +1,22 @@
 import React from 'react';
-import {getRouter} from './stores/RouteStore';
-let router = getRouter();
+import { Router, Route, DefaultRoute } from 'react-router';
+import BrowserHistory from 'react-router/lib/BrowserHistory';
+import App from './components/App';
+import LoginPage from './components/session/LoginPage';
+import SignupPage from './components/session/SignupPage';
+import AdminPages from './components/admin/AdminPages';
+import AdminVisitorsPage from './components/admin/VisitorsPage';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
-// React.render(<AppContainer />, document.getElementById('main'));
-router.run((Handler) => {
-  React.render(<Handler />, document.getElementById('main'));
-});
-
-
-// var React = require('react');
-// var router = require('./stores/RouteStore.react.jsx').getRouter();
-// window.React = React;
-//
-// router.run(function (Handler, state) {
-//   React.render(<Handler/>, document.getElementById('content'));
-// });
+React.render((
+  <Router history={BrowserHistory}>
+    <Route path="/" component={App}>
+      <Route path="login" component={LoginPage} />
+      <Route path="signup" component={SignupPage} />
+      <Route path="admin" component={AdminPages}>
+        <Route path="visitors" component={AdminVisitorsPage} />
+      </Route>
+    </Route>
+  </Router>
+), document.getElementById('main'));

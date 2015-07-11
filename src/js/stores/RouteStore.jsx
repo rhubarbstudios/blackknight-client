@@ -4,23 +4,23 @@ import SessionStore from '../stores/SessionStore';
 import BaseStore from './BaseStore';
 import assign from 'object-assign';
 import Router from 'react-router';
-import routes from '../routes.jsx';
+// import routes from '../routes.jsx';
 
-let router = Router.create({
-  routes: routes,
-  location: Router.HistoryLocation
-});
+// let router = Router.create({
+//   routes: routes,
+//   location: Router.HistoryLocation
+// });
 
 let ActionTypes = Constants.ActionTypes;
 
 const RouteStore = assign({}, BaseStore, {
 
-  getRouter() {
-    return router;
-  },
+  // getRouter() {
+  //   return router;
+  // },
 
   redirectHome() {
-    router.transitionTo('app');
+    Router.transitionTo('app');
   }
 });
 
@@ -35,17 +35,17 @@ RouteStore.dispatchToken = Dispatcher.register((payload) => {
   switch (action.type) {
 
     case ActionTypes.REDIRECT:
-      router.transitionTo(action.route);
+      Router.transitionTo(action.route);
       break;
 
     case ActionTypes.LOGIN_RESPONSE:
       if (SessionStore.isLoggedIn()) {
-        router.transitionTo('app');
+        Router.transitionTo('app');
       }
       break;
 
     case ActionTypes.RECEIVE_CREATED_STORY:
-      router.transitionTo('app');
+      Router.transitionTo('app');
       break;
 
     default:

@@ -1,6 +1,6 @@
 import Dispatcher from '../Dispatcher';
 import Constants from '../Constants';
-import WebAPIUtils from '../utils/WebAPIUtils.js';
+import WebAPIUtils from '../utils/WebAPIUtils';
 
 let ActionTypes = Constants.ActionTypes;
 

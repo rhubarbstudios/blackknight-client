@@ -1,9 +1,6 @@
 import React from 'react';
-import {RouteHandler} from 'react-router';
-
-// var Header = require('../components/Header.react.jsx');
+import {Navigation} from 'react-router';
 import SessionStore from '../stores/SessionStore';
-// import RouteStore from '../stores/RouteStore.jsx';
 
 function getStateFromStores() {
   return {
@@ -13,6 +10,14 @@ function getStateFromStores() {
 }
 
 export default React.createClass({
+
+  propTypes: {
+    children: React.PropTypes.object
+  },
+
+  // mixins: [
+  //   Navigation
+  // ],
 
   getInitialState() {
     return getStateFromStores();
@@ -26,14 +31,10 @@ export default React.createClass({
     SessionStore.removeChangeListener(this._onChange);
   },
 
-  // <Header
-  //   isLoggedIn={this.state.isLoggedIn}
-  //   email={this.state.email} />
-
   render() {
     return (
-      <div className="app">
-        <RouteHandler/>
+      <div>
+        {this.props.children}
       </div>
     );
   },

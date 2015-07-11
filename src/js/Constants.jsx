@@ -1,6 +1,6 @@
 import keyMirror from 'react/lib/keyMirror';
 
-let APIRoot = 'http://localhost:3000';
+let APIRoot = 'http://localhost:9000';
 
 export default {
   // event name triggered from store, listened to by views
@@ -9,14 +9,16 @@ export default {
   APIEndpoints: {
     LOGIN: APIRoot + '/v1/login',
     REGISTRATION: APIRoot + '/v1/users',
-    STORIES: APIRoot + '/v1/stories'
+    STORIES: APIRoot + '/v1/stories',
+    GET_VISITORS: APIRoot + '/visitors'
   },
 
-  // Each time you add an action, add it here... They should be past-tense
   ActionTypes: keyMirror({
     // Session
     LOGIN_REQUEST: null,
     LOGIN_RESPONSE: null,
+    SIGNUP_REQUEST: null,
+    LOGOUT: null,
 
     // Routes
     REDIRECT: null,
@@ -26,7 +28,14 @@ export default {
     LOAD_STORY: null,
     RECEIVE_STORY: null,
     CREATE_STORY: null,
-    RECEIVE_CREATED_STORY: null
+    RECEIVE_CREATED_STORY: null,
+
+    // Visitors
+    VISITORS_REQUESTED: null,
+    VISITORS_RECEIVED: null,
+
+    // Admin
+    UPDATE_HEADING: null
   }),
 
   ActionSources: keyMirror({

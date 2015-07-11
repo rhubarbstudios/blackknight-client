@@ -1,7 +1,7 @@
 import React from 'react';
 import SessionActionCreators from '../../actions/SessionActionCreators';
 import SessionStore from '../../stores/SessionStore';
-import ErrorNotice from '../../components/common/ErrorNotice.jsx';
+import ErrorNotice from '../../components/common/ErrorNotice';
 
 export default React.createClass({
 

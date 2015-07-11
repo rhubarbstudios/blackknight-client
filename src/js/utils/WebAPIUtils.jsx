@@ -57,6 +57,17 @@ export default {
           }
         }
       });
+  },
+
+  getVisitors() {
+    request.get(APIEndpoints.GET_VISITORS)
+    .set('Accept', 'application/json')
+    .end((error, res) => {
+      if (res) {
+        let visitors = JSON.parse(res.text);
+        ServerActionCreators.receiveVisitors(visitors);
+      }
+    });
   }
 
   // loadStories() {

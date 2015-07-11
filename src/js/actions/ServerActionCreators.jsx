@@ -11,6 +11,14 @@ export default {
       json: json,
       errors: errors
     });
+  },
+
+  receiveVisitors(visitors, errors) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.VISITORS_RECEIVED,
+      visitors: visitors,
+      errors: errors
+    });
   }
 
   // receiveStories: function(json) {

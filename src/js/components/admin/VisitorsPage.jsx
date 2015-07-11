@@ -1,22 +1,37 @@
 import React from 'react';
-import SessionActionCreators from '../../actions/SessionActionCreators';
-import SessionStore from '../../stores/SessionStore';
-import { Styles, AppBar } from 'material-ui';
+// import SessionActionCreators from '../../actions/SessionActionCreators';
+import AdminActionCreators from '../../actions/AdminActionCreators';
+import VisitorActionCreators from '../../actions/VisitorActionCreators';
+// import SessionStore from '../../stores/SessionStore';
+import VisitorStore from '../../stores/VisitorStore';
+import VisitorListItem from './VisitorListItem';
+import {List, Styles, FloatingActionButton} from 'material-ui';
+import AddIcon from '../common/icons/AddIcon';
 
+
+let Colors = Styles.Colors;
 let ThemeManager = new Styles.ThemeManager();
+
+function getStateFromStores() {
+  return {
+    visitors: VisitorStore.getVisitors()
+  };
+}
 
 export default React.createClass({
 
-  getInitialState() {
-    return { errors: [] };
-  },
-
-  componentDidMount() {
-    SessionStore.addChangeListener(this._onChange);
+  componentWillMount() {
+    AdminActionCreators.updateHeading('Visitors');
+    VisitorActionCreators.getVisitors();
+    VisitorStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
-    SessionStore.removeChangeListener(this._onChange);
+    VisitorStore.removeChangeListener(this._onChange);
+  },
+
+  getInitialState() {
+    return getStateFromStores();
   },
 
   getChildContext() {
@@ -25,24 +40,43 @@ export default React.createClass({
     };
   },
 
+  getStyles() {
+    let styles = {
+      floatingActionButton: {
+        right: '16px',
+        position: 'fixed',
+        bottom: '16px',
+        zIndex: '2000'
+      },
+
+      icon: {
+        height: '56px',
+        fill: '#fff'
+      }
+    };
+
+    return styles;
+  },
+
   render() {
+    let styles = this.getStyles();
+
     return (
       <div>
-        Visitors!
+        <List>
+          { this.state.visitors.map((visitor) => {
+            return <VisitorListItem visitor={visitor} key={visitor._id} />;
+          })}
+        </List>
+        <FloatingActionButton style={styles.floatingActionButton}>
+          <AddIcon style={styles.icon} />
+        </FloatingActionButton>
       </div>
     );
   },
 
   _onChange() {
-    this.setState({ errors: SessionStore.getErrors() });
-  },
-
-  _onSubmit(e) {
-    e.preventDefault();
-    this.setState({ errors: [] });
-    let email = this.refs.email.getDOMNode().value;
-    let password = this.refs.password.getDOMNode().value;
-    SessionActionCreators.login(email, password);
+    this.setState(getStateFromStores());
   },
 
   childContextTypes: {
