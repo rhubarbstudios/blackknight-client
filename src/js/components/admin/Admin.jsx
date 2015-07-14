@@ -1,9 +1,9 @@
 import React from 'react';
 import {Navigation} from 'react-router';
-import SessionActionCreators from '../../actions/SessionActionCreators';
 import SessionStore from '../../stores/SessionStore';
 import AdminStore from '../../stores/AdminStore';
 import { Styles, AppBar, LeftNav } from 'material-ui';
+import Stylizer from '../../utils/Stylizer';
 
 let ThemeManager = new Styles.ThemeManager();
 
@@ -43,11 +43,25 @@ export default React.createClass({
     };
   },
 
+  getStyles() {
+    return Stylizer.stylize({
+      appBar: {
+        position: 'fixed'
+      },
+
+      childrenContainer: {
+        paddingTop: '64px'
+      }
+    });
+  },
+
   render() {
     let menuItems = [
       { route: '/login', text: 'Home' },
       { route: 'admin/visitors', text: 'Visitors' }
     ];
+
+    let styles = this.getStyles();
 
     return (
       <div>
@@ -58,8 +72,11 @@ export default React.createClass({
           onChange={this._onNavChange} />
         <AppBar
           title={this.state.title}
-          onLeftIconButtonTouchTap={this._onClickMenu} />
-        {this.props.children}
+          onLeftIconButtonTouchTap={this._onClickMenu}
+          style={styles.appBar} />
+        <div style={styles.childrenContainer}>
+          {this.props.children}
+        </div>
       </div>
     );
   },

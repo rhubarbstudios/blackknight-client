@@ -1,15 +1,13 @@
 import React from 'react';
-// import SessionActionCreators from '../../actions/SessionActionCreators';
-import AdminActionCreators from '../../actions/AdminActionCreators';
-import VisitorActionCreators from '../../actions/VisitorActionCreators';
-// import SessionStore from '../../stores/SessionStore';
-import VisitorStore from '../../stores/VisitorStore';
+import AdminActionCreators from '../../../actions/AdminActionCreators';
+import VisitorActionCreators from '../../../actions/VisitorActionCreators';
+import VisitorStore from '../../../stores/VisitorStore';
 import VisitorListItem from './VisitorListItem';
 import {List, Styles, FloatingActionButton} from 'material-ui';
-import AddIcon from '../common/icons/AddIcon';
+import AddIcon from '../../common/icons/AddIcon';
+import {Link} from 'react-router';
+import Stylizer from '../../../utils/Stylizer';
 
-
-let Colors = Styles.Colors;
 let ThemeManager = new Styles.ThemeManager();
 
 function getStateFromStores() {
@@ -41,7 +39,7 @@ export default React.createClass({
   },
 
   getStyles() {
-    let styles = {
+    return Stylizer.stylize({
       floatingActionButton: {
         right: '16px',
         position: 'fixed',
@@ -53,9 +51,7 @@ export default React.createClass({
         height: '56px',
         fill: '#fff'
       }
-    };
-
-    return styles;
+    });
   },
 
   render() {
@@ -68,7 +64,10 @@ export default React.createClass({
             return <VisitorListItem visitor={visitor} key={visitor._id} />;
           })}
         </List>
-        <FloatingActionButton style={styles.floatingActionButton}>
+        <FloatingActionButton
+          style={styles.floatingActionButton}
+          linkButton={true}
+          containerElement={<Link to="/admin/visitors/new" />}>
           <AddIcon style={styles.icon} />
         </FloatingActionButton>
       </div>

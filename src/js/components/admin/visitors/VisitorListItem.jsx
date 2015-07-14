@@ -1,5 +1,6 @@
 import React from 'react';
 import {ListItem, Avatar, Styles, ListDivider} from 'material-ui';
+import Stylizer from '../../../utils/Stylizer';
 
 let ThemeManager = new Styles.ThemeManager();
 
@@ -15,17 +16,23 @@ export default React.createClass({
     };
   },
 
+  getStyles() {
+    return Stylizer.stylize({
+      p: {
+        paddingTop: '0'
+      }
+    });
+  },
+
   render() {
-    let pStyle = {
-      paddingTop: '0'
-    };
+    let styles = this.getStyles();
 
     return (
       <div>
         <ListItem
           leftAvatar={<Avatar>{this.props.visitor.firstName.charAt(0)}</Avatar>}
           secondaryText={
-            <p style={pStyle}>
+            <p style={styles.p}>
               {this.props.visitor.email}
               <br/>
               {this.props.visitor.company}
