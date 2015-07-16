@@ -10,10 +10,14 @@ export default {
     LOGIN: APIRoot + '/v1/login',
     REGISTRATION: APIRoot + '/v1/users',
     STORIES: APIRoot + '/v1/stories',
-    GET_VISITORS: APIRoot + '/visitors'
+    GET_VISITORS: APIRoot + '/visitors',
+    GET_VISITOR: APIRoot + '/visitors',
+    SAVE_VISITOR: APIRoot + '/visitors'
   },
 
   ActionTypes: keyMirror({
+    SHOW_ERROR: null,
+
     // Session
     LOGIN_REQUEST: null,
     LOGIN_RESPONSE: null,
@@ -33,6 +37,9 @@ export default {
     // Visitors
     VISITORS_REQUESTED: null,
     VISITORS_RECEIVED: null,
+    VISITOR_REQUESTED: null,
+    VISITOR_RECEIVED: null,
+    SAVE_VISITOR: null,
 
     // Admin
     UPDATE_HEADING: null

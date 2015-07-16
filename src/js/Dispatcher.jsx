@@ -25,9 +25,17 @@ export default assign(new Dispatcher(), {
    * that actions triggered here originated on the client-side
    **/
   handleViewAction(action) {
-    this.dispatch({
+    let dispatchArguments = {
       source: Constants.ActionSources.VIEW_ACTION,
       action: action
-    });
+    };
+
+    if (this.isDispatching()) {
+      window.setTimeout(() => {
+        this.dispatch(dispatchArguments);
+      });
+    } else {
+      this.dispatch(dispatchArguments);
+    }
   }
 });

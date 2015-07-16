@@ -13,7 +13,7 @@ export default assign({}, EventEmitter.prototype, {
   },
 
   // triggers change listener above, firing controller-view callback
-  emitChange() {
-    this.emit(Constants.CHANGE_EVENT);
+  emitChange(actionType) {
+    this.emit(Constants.CHANGE_EVENT, actionType);
   }
 });

@@ -45,12 +45,17 @@ export default React.createClass({
 
   getStyles() {
     return Stylizer.stylize({
+      container: {
+        height: '100%'
+      },
+
       appBar: {
         position: 'fixed'
       },
 
       childrenContainer: {
-        paddingTop: '64px'
+        paddingTop: '64px',
+        height: '100%'
       }
     });
   },
@@ -64,7 +69,7 @@ export default React.createClass({
     let styles = this.getStyles();
 
     return (
-      <div>
+      <div style={styles.container}>
         <LeftNav
           docked={false}
           menuItems={menuItems}

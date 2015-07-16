@@ -4,8 +4,7 @@ import {SvgIcon} from 'material-ui';
 export default React.createClass({
   render() {
     let style = {
-      height: '100%',
-      background: 'red'
+      height: '100%'
     };
 
     return (

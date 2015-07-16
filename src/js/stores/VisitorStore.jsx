@@ -5,16 +5,17 @@ import assign from 'object-assign';
 
 let ActionTypes = Constants.ActionTypes;
 
-let _visitors = [];
+let _visitor = {};
+let _error;
 
 const VisitorStore = assign({}, BaseStore, {
 
-  init(visitors) {
-    _visitors = visitors;
+  get() {
+    return _visitor;
   },
 
-  getVisitors() {
-    return _visitors;
+  getError() {
+    return _error;
   }
 
 });
@@ -24,9 +25,15 @@ VisitorStore.dispatchToken = Dispatcher.register((payload) => {
 
   switch (action.type) {
 
-    case ActionTypes.VISITORS_RECEIVED:
-      VisitorStore.init(action.visitors);
-      VisitorStore.emitChange();
+    case ActionTypes.VISITOR_RECEIVED:
+      _error = action.error;
+      _visitor = action.visitor;
+      VisitorStore.emitChange(ActionTypes.VISITOR_RECEIVED);
+      break;
+
+    case ActionTypes.VISITOR_UPDATED:
+      _error = action.error;
+      VisitorStore.emitChange(ActionTypes.VISITOR_UPDATED);
       break;
 
     default:

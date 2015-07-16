@@ -1,7 +1,8 @@
 import React from 'react';
+import {Navigation} from 'react-router';
 import AdminActionCreators from '../../../actions/AdminActionCreators';
 import VisitorActionCreators from '../../../actions/VisitorActionCreators';
-import VisitorStore from '../../../stores/VisitorStore';
+import VisitorsStore from '../../../stores/VisitorsStore';
 import VisitorListItem from './VisitorListItem';
 import {List, Styles, FloatingActionButton} from 'material-ui';
 import AddIcon from '../../common/icons/AddIcon';
@@ -12,20 +13,24 @@ let ThemeManager = new Styles.ThemeManager();
 
 function getStateFromStores() {
   return {
-    visitors: VisitorStore.getVisitors()
+    visitors: VisitorsStore.getVisitors()
   };
 }
 
 export default React.createClass({
 
-  componentWillMount() {
+  mixins: [
+    Navigation
+  ],
+
+  componentDidMount() {
     AdminActionCreators.updateHeading('Visitors');
     VisitorActionCreators.getVisitors();
-    VisitorStore.addChangeListener(this._onChange);
+    VisitorsStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
-    VisitorStore.removeChangeListener(this._onChange);
+    VisitorsStore.removeChangeListener(this._onChange);
   },
 
   getInitialState() {
@@ -61,7 +66,12 @@ export default React.createClass({
       <div>
         <List>
           { this.state.visitors.map((visitor) => {
-            return <VisitorListItem visitor={visitor} key={visitor._id} />;
+            return (
+              <VisitorListItem
+                visitor={visitor}
+                key={visitor._id}
+                onClick={this._handleItemClick.bind(this, visitor._id)} />
+            );
           })}
         </List>
         <FloatingActionButton
@@ -76,6 +86,10 @@ export default React.createClass({
 
   _onChange() {
     this.setState(getStateFromStores());
+  },
+
+  _handleItemClick(id) {
+    this.transitionTo('/admin/visitors/' + id);
   },
 
   childContextTypes: {

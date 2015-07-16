@@ -1,12 +1,12 @@
 import React from 'react';
-import {List, Styles, FloatingActionButton} from 'material-ui';
+import {Styles, FloatingActionButton} from 'material-ui';
+import Stylizer from '../../../utils/Stylizer';
 
-let Colors = Styles.Colors;
 let ThemeManager = new Styles.ThemeManager();
 
 function getStateFromStores() {
   return {
-    // visitors: VisitorStore.getVisitors()
+    // visitors: VisitorsStore.getVisitors()
   };
 }
 
@@ -16,7 +16,7 @@ export default React.createClass({
     children: React.PropTypes.object
   },
 
-  componentWillMount() {
+  componentDidMount() {
 
   },
 
@@ -34,9 +34,19 @@ export default React.createClass({
     };
   },
 
+  getStyles() {
+    return Stylizer.stylize({
+      container: {
+        height: '100%'
+      }
+    });
+  },
+
   render() {
+    let styles = this.getStyles();
+
     return (
-      <div>
+      <div style={styles.container}>
         {this.props.children}
       </div>
     );

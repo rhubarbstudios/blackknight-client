@@ -47,6 +47,7 @@
     "react-router": "v1.0.0-beta1",
     "react-tap-event-plugin": "^0.1.7",
     "react-vendor-prefix": "0.0.1",
-    "superagent": "^1.2.0"
+    "superagent": "^1.2.0",
+    "superagent-promise": "^1.0.0"
   }
 }

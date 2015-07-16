@@ -6,6 +6,13 @@ let ActionTypes = Constants.ActionTypes;
 
 export default {
 
+  showError(message) {
+    Dispatcher.handleViewAction({
+      type: ActionTypes.SHOW_ERROR,
+      message: message
+    });
+  },
+
   getVisitors() {
     Dispatcher.handleViewAction({
       type: ActionTypes.VISITORS_REQUESTED

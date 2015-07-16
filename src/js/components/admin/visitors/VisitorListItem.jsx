@@ -7,7 +7,8 @@ let ThemeManager = new Styles.ThemeManager();
 export default React.createClass({
 
   propTypes: {
-    visitor: React.PropTypes.object.isRequired
+    visitor: React.PropTypes.object.isRequired,
+    onClick: React.PropTypes.func
   },
 
   getChildContext() {
@@ -28,7 +29,7 @@ export default React.createClass({
     let styles = this.getStyles();
 
     return (
-      <div>
+      <div onClick={this.props.onClick}>
         <ListItem
           leftAvatar={<Avatar>{this.props.visitor.firstName.charAt(0)}</Avatar>}
           secondaryText={

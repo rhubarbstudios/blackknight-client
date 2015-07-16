@@ -1,5 +1,6 @@
 import Dispatcher from '../Dispatcher';
 import Constants from '../Constants';
+import WebAPIUtils from '../utils/WebAPIUtils';
 
 let ActionTypes = Constants.ActionTypes;
 
@@ -13,11 +14,27 @@ export default {
     });
   },
 
-  receiveVisitors(visitors, errors) {
+  receiveVisitors(error, visitors) {
     Dispatcher.handleServerAction({
       type: ActionTypes.VISITORS_RECEIVED,
       visitors: visitors,
-      errors: errors
+      error: error
+    });
+  },
+
+  receiveVisitor(error, visitor) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.VISITOR_RECEIVED,
+      visitor: visitor,
+      error: error
+    });
+  },
+
+  receiveVisitorUpdate(error, response) {
+    Dispatcher.handleServerAction({
+      type: ActionTypes.VISITOR_UPDATED,
+      response: response,
+      error: error
     });
   }
 
