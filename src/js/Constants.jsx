@@ -1,6 +1,6 @@
 import keyMirror from 'react/lib/keyMirror';
 
-let APIRoot = 'http://blackknight-server.herokuapp.com';
+let APIRoot = 'https://blackknight-server.herokuapp.com';
 if (process.env.NODE_ENV === 'development') {
   APIRoot = 'http://blackknight.dev:9000';
 }
