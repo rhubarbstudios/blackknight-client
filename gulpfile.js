@@ -10,6 +10,10 @@
   gulp/tasks/default.js specifies the default set of tasks to run
   when you run `gulp`.
 */
+if (!process.env.NODE_ENV) {
+  throw new Error('NODE_ENV not set');
+}
+
 var requireDir = require('require-dir');
 
 // Require all tasks in gulp/tasks, including subfolders

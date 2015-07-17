@@ -1,6 +1,10 @@
 import keyMirror from 'react/lib/keyMirror';
 
-let APIRoot = 'http://blackknight.dev:9000';
+let APIRoot = 'http://blackknight-server.herokuapp.com';
+if (process.env.NODE_ENV === 'development') {
+  APIRoot = 'http://blackknight.dev:9000';
+}
+console.log('APIRoot: ', APIRoot);
 
 export default {
   // event name triggered from store, listened to by views
