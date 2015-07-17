@@ -23,6 +23,9 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.3"
   },
+  "engines": {
+    "node": "0.12"
+  },
   "scripts": {
     "dev": "gulp --type dev",
     "start": "gulp",
