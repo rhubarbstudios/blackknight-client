@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "gulp --type dev",
     "start": "gulp",
-    "build": "gulp build"
+    "build": "gulp buildAndExit"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
