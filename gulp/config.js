@@ -29,12 +29,23 @@ module.exports = {
   },
   browserify: {
     settings: {
-      transform: ['babelify', 'reactify', 'envify']
+      transform: [
+        ['babelify'],
+        ['reactify'],
+        ['envify'],
+        [
+          'uglifyify',
+          {
+            global: true
+          }
+        ]
+      ]
     },
     src: src + '/js/index.jsx',
     dest: dest + '/js',
     outputName: 'index.js',
-    debug: gutil.env.type === 'dev'
+    // debug: gutil.env.type === 'dev'
+    debug: true
   },
   html: {
     src: 'src/index.html',
