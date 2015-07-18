@@ -21,7 +21,8 @@
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.2.3"
+    "watchify": "^3.2.3",
+    "esutils": "^2.0.2"
   },
   "engines": {
     "node": "0.12"
