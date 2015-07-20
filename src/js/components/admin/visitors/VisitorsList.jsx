@@ -8,14 +8,9 @@ import {List, Styles, FloatingActionButton} from 'material-ui';
 import AddIcon from '../../common/icons/AddIcon';
 import {Link} from 'react-router';
 import Stylizer from '../../../utils/Stylizer';
+import Loading from '../../common/Loading';
 
 let ThemeManager = new Styles.ThemeManager();
-
-function getStateFromStores() {
-  return {
-    visitors: VisitorsStore.getVisitors()
-  };
-}
 
 export default React.createClass({
 
@@ -34,7 +29,10 @@ export default React.createClass({
   },
 
   getInitialState() {
-    return getStateFromStores();
+    return {
+      visitors: VisitorsStore.getVisitors(),
+      loading: true
+    };
   },
 
   getChildContext() {
@@ -45,6 +43,11 @@ export default React.createClass({
 
   getStyles() {
     return Stylizer.stylize({
+
+      container: {
+        height: '100%'
+      },
+
       floatingActionButton: {
         right: '16px',
         position: 'fixed',
@@ -62,10 +65,14 @@ export default React.createClass({
   render() {
     let styles = this.getStyles();
 
-    return (
+    let loading = (
+      <Loading />
+    );
+
+    let list = (
       <div>
         <List>
-          { this.state.visitors.map((visitor) => {
+          {this.state.visitors.map((visitor) => {
             return (
               <VisitorListItem
                 visitor={visitor}
@@ -82,10 +89,21 @@ export default React.createClass({
         </FloatingActionButton>
       </div>
     );
+
+    let child = this.state.loading ? loading : list;
+
+    return (
+      <div style={styles.container}>
+        {child}
+      </div>
+    );
   },
 
   _onChange() {
-    this.setState(getStateFromStores());
+    this.setState({
+      visitors: VisitorsStore.getVisitors(),
+      loading: false
+    });
   },
 
   _handleItemClick(id) {
