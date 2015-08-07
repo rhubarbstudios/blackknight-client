@@ -3,6 +3,7 @@ import SessionStore from '../stores/SessionStore';
 import ErrorStore from '../stores/ErrorStore';
 import Stylizer from '../utils/Stylizer';
 import {Styles, Snackbar} from 'material-ui';
+import {RouteHandler} from 'react-router';
 
 let ThemeManager = new Styles.ThemeManager();
 
@@ -15,10 +16,6 @@ function getStateFromStores() {
 }
 
 export default React.createClass({
-
-  propTypes: {
-    children: React.PropTypes.object
-  },
 
   getInitialState() {
     return getStateFromStores();
@@ -59,7 +56,7 @@ export default React.createClass({
           action="ok"
           autoHideDuration={3000}
           onActionTouchTap={this._hideSnackbar} />
-        {this.props.children}
+        <RouteHandler />
       </div>
     );
   },
@@ -77,6 +74,10 @@ export default React.createClass({
 
   childContextTypes: {
     muiTheme: React.PropTypes.object
+  },
+
+  contextTypes: {
+    router: React.PropTypes.func
   }
 
 });

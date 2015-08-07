@@ -41,9 +41,9 @@ module.exports = {
         ]
       ]
     },
-    src: src + '/js/index.jsx',
+    src: src + '/js/App.jsx',
     dest: dest + '/js',
-    outputName: 'index.js',
+    outputName: 'App.js',
     // debug: gutil.env.type === 'dev'
     debug: true
   },

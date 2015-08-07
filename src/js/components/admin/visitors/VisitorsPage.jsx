@@ -1,8 +1,6 @@
 import React from 'react';
-import {Styles, FloatingActionButton} from 'material-ui';
+import {RouteHandler} from 'react-router';
 import Stylizer from '../../../utils/Stylizer';
-
-let ThemeManager = new Styles.ThemeManager();
 
 function getStateFromStores() {
   return {
@@ -11,10 +9,6 @@ function getStateFromStores() {
 }
 
 export default React.createClass({
-
-  propTypes: {
-    children: React.PropTypes.object
-  },
 
   componentDidMount() {
 
@@ -26,12 +20,6 @@ export default React.createClass({
 
   getInitialState() {
     return getStateFromStores();
-  },
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
 
   getStyles() {
@@ -47,7 +35,7 @@ export default React.createClass({
 
     return (
       <div style={styles.container}>
-        {this.props.children}
+        <RouteHandler />
       </div>
     );
   },
@@ -56,8 +44,9 @@ export default React.createClass({
     this.setState(getStateFromStores());
   },
 
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
+  contextTypes: {
+    muiTheme: React.PropTypes.object,
+    router: React.PropTypes.func
   }
 
 });

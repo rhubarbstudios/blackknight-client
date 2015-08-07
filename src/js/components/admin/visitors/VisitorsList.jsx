@@ -4,13 +4,11 @@ import AdminActionCreators from '../../../actions/AdminActionCreators';
 import VisitorActionCreators from '../../../actions/VisitorActionCreators';
 import VisitorsStore from '../../../stores/VisitorsStore';
 import VisitorListItem from './VisitorListItem';
-import {List, Styles, FloatingActionButton} from 'material-ui';
+import {List, FloatingActionButton} from 'material-ui';
 import AddIcon from '../../common/icons/AddIcon';
 import {Link} from 'react-router';
 import Stylizer from '../../../utils/Stylizer';
 import Loading from '../../common/Loading';
-
-let ThemeManager = new Styles.ThemeManager();
 
 export default React.createClass({
 
@@ -35,12 +33,6 @@ export default React.createClass({
     };
   },
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
-
   getStyles() {
     return Stylizer.stylize({
 
@@ -57,7 +49,8 @@ export default React.createClass({
 
       icon: {
         height: '56px',
-        fill: '#fff'
+        fill: '#fff',
+        filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))'
       }
     });
   },
@@ -110,7 +103,7 @@ export default React.createClass({
     this.transitionTo('/admin/visitors/' + id);
   },
 
-  childContextTypes: {
+  contextTypes: {
     muiTheme: React.PropTypes.object
   }
 

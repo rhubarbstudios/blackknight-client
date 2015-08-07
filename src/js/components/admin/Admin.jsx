@@ -1,11 +1,9 @@
 import React from 'react';
-import {Navigation} from 'react-router';
+import {Navigation, RouteHandler} from 'react-router';
 import SessionStore from '../../stores/SessionStore';
 import AdminStore from '../../stores/AdminStore';
-import { Styles, AppBar, LeftNav } from 'material-ui';
+import {AppBar, LeftNav} from 'material-ui';
 import Stylizer from '../../utils/Stylizer';
-
-let ThemeManager = new Styles.ThemeManager();
 
 function getStateFromStores() {
   return {
@@ -19,10 +17,6 @@ export default React.createClass({
     Navigation
   ],
 
-  propTypes: {
-    children: React.PropTypes.object
-  },
-
   getInitialState() {
     return getStateFromStores();
   },
@@ -35,12 +29,6 @@ export default React.createClass({
   componentWillUnmount() {
     SessionStore.removeChangeListener(this._onChange);
     AdminStore.removeChangeListener(this._onChange);
-  },
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
 
   getStyles() {
@@ -80,7 +68,7 @@ export default React.createClass({
           onLeftIconButtonTouchTap={this._onClickMenu}
           style={styles.appBar} />
         <div style={styles.childrenContainer}>
-          {this.props.children}
+          <RouteHandler />
         </div>
       </div>
     );
@@ -98,8 +86,9 @@ export default React.createClass({
     this.transitionTo(menuItem.route);
   },
 
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
+  contextTypes: {
+    muiTheme: React.PropTypes.object,
+    router: React.PropTypes.func
   }
 
 });

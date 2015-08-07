@@ -1,8 +1,7 @@
 import React from 'react';
-import {Styles, CircularProgress} from 'material-ui';
+import {CircularProgress} from 'material-ui';
 import Stylizer from '../../utils/Stylizer';
 
-let ThemeManager = new Styles.ThemeManager();
 let timeout;
 
 export default React.createClass({
@@ -22,12 +21,6 @@ export default React.createClass({
   getInitialState() {
     return {
       visible: false
-    };
-  },
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
     };
   },
 
@@ -61,7 +54,7 @@ export default React.createClass({
     );
   },
 
-  childContextTypes: {
+  contextTypes: {
     muiTheme: React.PropTypes.object
   }
 });

@@ -9,8 +9,6 @@ import {Styles} from 'material-ui';
 import Stylizer from '../../../utils/Stylizer';
 import Loading from '../../common/Loading';
 
-let ThemeManager = new Styles.ThemeManager();
-
 export default React.createClass({
 
   mixins: [
@@ -35,12 +33,6 @@ export default React.createClass({
 
   componentWillUnmount() {
     VisitorStore.removeChangeListener(this._onChange);
-  },
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
 
   getStyles() {
@@ -94,7 +86,8 @@ export default React.createClass({
     }
   },
 
-  childContextTypes: {
+  contextTypes: {
     muiTheme: React.PropTypes.object
   }
+
 });

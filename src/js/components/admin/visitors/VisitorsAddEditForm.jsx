@@ -2,15 +2,12 @@ import React from 'react';
 import VisitorStore from '../../../stores/VisitorStore';
 import VisitorActionCreators from '../../../actions/VisitorActionCreators';
 import ErrorActionCreators from '../../../actions/ErrorActionCreators';
-import {Avatar, Styles, TextField, DatePicker, RaisedButton, FlatButton} from 'material-ui';
+import {Avatar, TextField, DatePicker, RaisedButton, FlatButton} from 'material-ui';
 import Stylizer from '../../../utils/Stylizer';
 import keyMirror from 'react/lib/keyMirror';
 import _ from 'lodash';
 import {Link, Navigation} from 'react-router';
-import Loading from '../../common/Loading';
 import WebAPIUtils from '../../../utils/WebAPIUtils';
-
-let ThemeManager = new Styles.ThemeManager();
 
 const fields = keyMirror({
   FIRST_NAME: null,
@@ -58,12 +55,6 @@ export default React.createClass({
       errors: {},
       saving: false,
       snackBarError: undefined
-    };
-  },
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
     };
   },
 
@@ -307,7 +298,7 @@ export default React.createClass({
     }
   },
 
-  childContextTypes: {
+  contextTypes: {
     muiTheme: React.PropTypes.object
   }
 });

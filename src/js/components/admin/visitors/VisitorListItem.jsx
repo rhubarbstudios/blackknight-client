@@ -1,20 +1,12 @@
 import React from 'react';
-import {ListItem, Avatar, Styles, ListDivider} from 'material-ui';
+import {ListItem, Avatar, ListDivider} from 'material-ui';
 import Stylizer from '../../../utils/Stylizer';
-
-let ThemeManager = new Styles.ThemeManager();
 
 export default React.createClass({
 
   propTypes: {
     visitor: React.PropTypes.object.isRequired,
     onClick: React.PropTypes.func
-  },
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
 
   getStyles() {
@@ -47,7 +39,7 @@ export default React.createClass({
     );
   },
 
-  childContextTypes: {
+  contextTypes: {
     muiTheme: React.PropTypes.object
   }
 
